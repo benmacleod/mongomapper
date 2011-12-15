@@ -9,7 +9,9 @@ module MongoMapper
         include PluckyMethods
 
         def find_each(opts={})
-          super(opts).each { |doc| yield load(doc) }
+          super(opts) do |cursor| 
+            cursor.each { |doc| yield load(doc) }
+          end
         end
 
         def find_by_id(id)
